@@ -22,14 +22,15 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "storage" {
-  source     = "../../"
+  source = "../../"
+
   project_id = var.project_id
 
   buckets = [
     {
-      name                        = "example-01"
-      location                    = "EU"
-      storage_class               = "STANDARD"
+      name          = "example-01"
+      location      = "EU"
+      storage_class = "STANDARD"
 
       labels = {
         environment = "examples"

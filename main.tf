@@ -27,7 +27,8 @@ locals {
 }
 
 module "buckets" {
-  source     = "./modules/buckets"
+  source = "./modules/buckets"
+
   project_id = var.project_id
   buckets    = local.buckets
 }

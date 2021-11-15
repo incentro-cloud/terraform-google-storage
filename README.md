@@ -12,14 +12,15 @@ This module supports creating:
 
 ```hcl
 module "storage" {
-  source     = "github.com/incentro-cloud/terraform-google-storage"
+  source = "github.com/incentro-cloud/terraform-google-storage"
+  
   project_id = var.project_id
 
   buckets = [
     {
-      name                        = "example-01"
-      location                    = "EU"
-      storage_class               = "STANDARD"
+      name          = "example-01"
+      location      = "EU"
+      storage_class = "STANDARD"
 
       labels = {
         environment = "examples"
