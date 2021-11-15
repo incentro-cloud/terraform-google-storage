@@ -11,8 +11,8 @@ This module supports creating:
 ## Usage
 
 ```hcl
-module "cloud_storage" {
-  source     = "../../"
+module "storage" {
+  source     = "github.com/incentro-cloud/terraform-google-storage"
   project_id = var.project_id
 
   buckets = [
