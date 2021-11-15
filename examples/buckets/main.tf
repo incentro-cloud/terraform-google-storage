@@ -21,7 +21,7 @@ terraform {
 # STORAGE BUCKETS
 # ---------------------------------------------------------------------------------------------------------------------
 
-module "cloud_storage" {
+module "storage" {
   source     = "../../"
   project_id = var.project_id
 
