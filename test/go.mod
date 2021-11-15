@@ -1,4 +1,4 @@
-module github.com/robino-io/terraform-google-cloud-storage/test
+module github.com/incentro-cloud/terraform-google-storage/test
 
 go 1.16
 
