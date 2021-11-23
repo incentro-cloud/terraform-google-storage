@@ -80,6 +80,12 @@ variable "website" {
   default     = null
 }
 
+variable "objects" {
+  type        = any
+  description = "The objects."
+  default     = []
+}
+
 variable "policies" {
   type        = any
   description = "The IAM policies."

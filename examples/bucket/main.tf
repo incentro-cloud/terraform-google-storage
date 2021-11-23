@@ -24,18 +24,34 @@ terraform {
 module "storage" {
   source = "../../"
 
-  project_id = var.project_id
+  project_id    = var.project_id
+  name          = "bucket"
+  location      = "EU"
+  storage_class = "STANDARD"
 
-  name = "bucket-iam-bindings"
+  labels = {
+    environment = "examples"
+  }
 
-  iam_bindings = [
+  retention_policy = {
+    retention_period = 365
+  }
+
+  cors = {
+    origin          = ["http://examples.com"]
+    method          = ["GET", "HEAD", "PUT", "POST", "DELETE"]
+    response_header = ["*"]
+    max_age_seconds = 3600
+  }
+
+  lifecycle_rules = [
     {
-      members = ["allUsers"]
-      role    = "roles/storage.objectViewer"
-    },
-    {
-      members = ["allUsers"]
-      role    = "roles/storage.objectAdmin"
+      action = {
+        type = "Delete"
+      }
+      condition = {
+        age = 365
+      }
     }
   ]
 }
