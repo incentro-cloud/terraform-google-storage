@@ -23,25 +23,24 @@ terraform {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# STORAGE BUCKETS
+# STORAGE BUCKET
 # ---------------------------------------------------------------------------------------------------------------------
 
-resource "google_storage_bucket" "buckets" {
-  for_each                    = { for x in var.buckets : x.name => x }
-  name                        = "${var.project_id}-${each.value.name}"
+resource "google_storage_bucket" "bucket" {
+  name                        = "${var.project_id}-${var.name}"
   project                     = var.project_id
-  location                    = each.value.location
-  storage_class               = each.value.storage_class
-  uniform_bucket_level_access = each.value.uniform_bucket_level_access
-  labels                      = each.value.labels
-  force_destroy               = each.value.force_destroy
+  location                    = var.location
+  storage_class               = var.storage_class
+  uniform_bucket_level_access = var.uniform_bucket_level_access
+  labels                      = var.labels
+  force_destroy               = var.force_destroy
 
   versioning {
-    enabled = each.value.versioning
+    enabled = var.versioning
   }
 
   dynamic "retention_policy" {
-    for_each = lookup(each.value, "retention_policy") == null ? [] : [each.value.retention_policy]
+    for_each = var.retention_policy == null ? [] : [var.retention_policy]
 
     content {
       is_locked        = lookup(retention_policy.value, "is_locked", false)
@@ -50,7 +49,7 @@ resource "google_storage_bucket" "buckets" {
   }
 
   dynamic "encryption" {
-    for_each = lookup(each.value, "encryption") == null ? [] : [each.value.encryption]
+    for_each = var.encryption == null ? [] : [var.encryption]
 
     content {
       default_kms_key_name = encryption.value.default_kms_key_name
@@ -58,7 +57,7 @@ resource "google_storage_bucket" "buckets" {
   }
 
   dynamic "cors" {
-    for_each = lookup(each.value, "cors") == null ? [] : [each.value.cors]
+    for_each = var.cors == null ? [] : [var.cors]
 
     content {
       origin          = lookup(cors.value, "origin", null)
@@ -69,12 +68,14 @@ resource "google_storage_bucket" "buckets" {
   }
 
   dynamic "lifecycle_rule" {
-    for_each = lookup(each.value, "lifecycle_rules", [])
+    for_each = var.lifecycle_rules == null ? [] : var.lifecycle_rules
+
     content {
       action {
         type          = lifecycle_rule.value.action.type
         storage_class = lookup(lifecycle_rule.value.action, "storage_class", null)
       }
+
       condition {
         age                   = lookup(lifecycle_rule.value.condition, "age", null)
         created_before        = lookup(lifecycle_rule.value.condition, "created_before", null)
@@ -86,11 +87,20 @@ resource "google_storage_bucket" "buckets" {
   }
 
   dynamic "logging" {
-    for_each = lookup(each.value, "logging") == null ? [] : [each.value.logging]
+    for_each = var.logging == null ? [] : [var.logging]
 
     content {
       log_bucket        = logging.value.log_bucket
       log_object_prefix = lookup(logging.value, "log_object_prefix", null)
+    }
+  }
+
+  dynamic "website" {
+    for_each = var.website == null ? [] : [var.website]
+
+    content {
+      main_page_suffix = lookup(website.value, "main_page_suffix", null)
+      not_found_page   = lookup(website.value, "not_found_page", null)
     }
   }
 }

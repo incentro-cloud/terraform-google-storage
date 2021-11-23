@@ -1,34 +1,69 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # STORAGE
-# Module for creating storage buckets.
+# Module for creating a storage bucket and bindings, and assigning members.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # ---------------------------------------------------------------------------------------------------------------------
-# STORAGE BUCKETS
+# STORAGE BUCKET
+# ---------------------------------------------------------------------------------------------------------------------
+
+module "bucket" {
+  source = "./modules/bucket"
+
+  name                        = var.name
+  location                    = var.location
+  project_id                  = var.project_id
+  storage_class               = var.storage_class
+  uniform_bucket_level_access = var.uniform_bucket_level_access
+  force_destroy               = var.force_destroy
+  versioning                  = var.versioning
+  labels                      = var.labels
+  retention_policy            = var.retention_policy
+  encryption                  = var.encryption
+  cors                        = var.cors
+  lifecycle_rules             = var.lifecycle_rules
+  logging                     = var.logging
+  website                     = var.website
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# IAM BINDINGS (AUTHORITATIVE)
 # ---------------------------------------------------------------------------------------------------------------------
 
 locals {
-  buckets = [
-    for x in var.buckets : {
-      name                        = x.name
-      location                    = lookup(x, "location", "EU")
-      storage_class               = lookup(x, "storage_class", "STANDARD")
-      uniform_bucket_level_access = lookup(x, "uniform_bucket_level_access", true)
-      force_destroy               = lookup(x, "force_destroy", false)
-      versioning                  = lookup(x, "versioning", false)
-      labels                      = lookup(x, "labels", {})
-      retention_policy            = lookup(x, "retention_policy", null)
-      encryption                  = lookup(x, "encryption", null)
-      cors                        = lookup(x, "cors", null)
-      lifecycle_rules             = lookup(x, "lifecycle_rules", [])
-      logging                     = lookup(x, "logging", null)
+  iam_bindings = [
+    for x in var.iam_bindings : {
+      bucket    = lookup(x, "bucket", module.bucket.bucket.name)
+      members   = x.members
+      role      = x.role
+      condition = lookup(x, "condition", null)
     }
   ]
 }
 
-module "buckets" {
-  source = "./modules/buckets"
+module "iam_bindings" {
+  source = "./modules/iam_bindings"
 
-  project_id = var.project_id
-  buckets    = local.buckets
+  iam_bindings = local.iam_bindings
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# IAM MEMBERS (NON-AUTHORITATIVE)
+# ---------------------------------------------------------------------------------------------------------------------
+
+locals {
+  iam_members = [
+    for x in var.iam_members : {
+      bucket    = lookup(x, "bucket", module.bucket.bucket.name)
+      member    = x.member
+      role      = x.role
+      condition = lookup(x, "condition", null)
+    }
+  ]
+}
+
+module "iam_members" {
+  source = "./modules/iam_members"
+
+  iam_members = local.iam_members
 }

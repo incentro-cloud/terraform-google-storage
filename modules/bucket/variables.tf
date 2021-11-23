@@ -79,21 +79,3 @@ variable "website" {
   description = ""
   default     = null
 }
-
-variable "policies" {
-  type        = any
-  description = "The IAM policies."
-  default     = []
-}
-
-variable "iam_bindings" {
-  type        = any
-  description = "The IAM bindings."
-  default     = []
-}
-
-variable "iam_members" {
-  type        = any
-  description = "The IAM members."
-  default     = []
-}
