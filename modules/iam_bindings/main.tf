@@ -28,6 +28,7 @@ terraform {
 
 resource "google_storage_bucket_iam_binding" "iam_bindings" {
   provider = google-beta
+
   for_each = { for x in var.iam_bindings : x.role => x }
   bucket   = each.value.bucket
   members  = each.value.members
@@ -35,7 +36,6 @@ resource "google_storage_bucket_iam_binding" "iam_bindings" {
 
   dynamic "condition" {
     for_each = lookup(each.value, "condition") == null ? [] : [each.value.condition]
-
     content {
       title       = condition.value.title
       description = lookup(condition.value, "description", null)

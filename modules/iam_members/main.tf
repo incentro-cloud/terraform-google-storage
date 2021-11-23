@@ -36,7 +36,6 @@ resource "google_storage_bucket_iam_member" "iam_members" {
 
   dynamic "condition" {
     for_each = lookup(each.value, "condition") == null ? [] : [each.value.condition]
-
     content {
       title       = condition.value.title
       description = lookup(condition.value, "description", null)
