@@ -29,7 +29,7 @@ terraform {
 resource "google_storage_bucket_iam_binding" "iam_bindings" {
   provider = google-beta
 
-  for_each = { for x in var.iam_bindings : x.role => x }
+  for_each = { for iam_binding in var.iam_bindings : iam_binding.role => iam_binding }
   bucket   = each.value.bucket
   members  = each.value.members
   role     = each.value.role

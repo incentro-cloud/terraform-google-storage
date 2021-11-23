@@ -1,4 +1,4 @@
-output "storage_bucket" {
-  value       = module.storage
-  description = "The storage bucket."
+output "storage_bucket_name" {
+  value       = module.storage.bucket_name
+  description = "The storage bucket name."
 }

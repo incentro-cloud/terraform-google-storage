@@ -22,6 +22,8 @@ func TestTerraformBucketObjectsIamBindingsExample(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	bucketName := terraform.Output(t, terraformOptions, "storage_bucket_name")
+	objectName := terraform.Output(t, terraformOptions, "storage_object_name")
+
 	gcp.AssertStorageBucketExists(t, bucketName)
-	gcp.ReadBucketObject(t, bucketName, "incentro")
+	gcp.ReadBucketObject(t, bucketName, objectName)
 }
