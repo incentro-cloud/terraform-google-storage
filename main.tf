@@ -33,9 +33,10 @@ module "bucket" {
 locals {
   objects = [
     for object in var.objects : {
-      name   = object.name
-      source = object.source
-      bucket = lookup(object, "bucket", module.bucket.bucket.name)
+      name    = object.name
+      content = lookup(object, "content", null)
+      source  = lookup(object, "source", null)
+      bucket  = lookup(object, "bucket", module.bucket.bucket.name)
     }
   ]
 }

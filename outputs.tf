@@ -5,7 +5,7 @@ output "bucket" {
 
 output "bucket_name" {
   value       = module.bucket.bucket.name
-  description = "The storage bucket."
+  description = "The name of the storage bucket."
 }
 
 output "objects" {
@@ -16,4 +16,14 @@ output "objects" {
 output "objects_names" {
   value       = [for object in module.objects.objects : object.name]
   description = "The names of the objects."
+}
+
+output "iam_bindings" {
+  value = module.iam_bindings
+  description = "The IAM bindings."
+}
+
+output "iam_members" {
+  value = module.iam_members
+  description = "The IAM members."
 }

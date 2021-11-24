@@ -29,8 +29,8 @@ module "storage" {
 
   objects = [
     {
-      name   = "incentro"
-      source = "./assets/incentro.png"
+      name   = "string"
+      content = "This is a string of data."
     }
   ]
 
