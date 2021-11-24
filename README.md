@@ -6,56 +6,82 @@ Module for creating storage buckets.
 
 This module supports creating:
 
-- Storage buckets
+- Storage bucket
+- Objects
+- IAM bindings
+- IAM members
 
 ## Usage
 
 ```hcl
-module "storage" {
-  source = "github.com/incentro-cloud/terraform-google-storage"
-  
-  project_id = var.project_id
 
-  buckets = [
-    {
-      name          = "example-01"
-      location      = "EU"
-      storage_class = "STANDARD"
-
-      labels = {
-        environment = "examples"
-      }
-
-      retention_policy = {
-        retention_period = 365
-      }
-
-      cors = {
-        origin          = ["http://examples.com"]
-        method          = ["GET", "HEAD", "PUT", "POST", "DELETE"]
-        response_header = ["*"]
-        max_age_seconds = 3600
-      }
-
-      lifecycle_rules = [
-        {
-          action = {
-            type = "Delete"
-          }
-          condition = {
-            age = 365
-          }
-        }
-      ]
-    },
-    {
-      name                        = "example-02"
-      location                    = "EU"
-      storage_class               = "STANDARD"
-      uniform_bucket_level_access = false
-      force_destroy               = true
-      versioning                  = true
-    }
-  ]
-}
 ```
+
+## Inputs
+
+Most inputs map to the supported arguments. Links to the official documentation are included.
+
+### Storage bucket
+
+Submodule for creating a storage bucket.
+
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket "google_storage_bucket") for the **google_storage_bucket** documentation.
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `project_id` | string |  | Required. The project identifier. |
+| `name` | string |  | Required. The name of the storage bucket. |
+| `location` | string | "EU" | Optional. The location of the storage bucket. |
+| `storage_class` | string | "STANDARD" | Optional. The storage class of the storage bucket. |
+| `uniform_bucket_level_access` | bool | true | Optional. When set to 'true', enables uniform bucket-level access. |
+| `force_destroy` | bool | false | Optional. When set to 'true', deleting a storage bucket will delete all contained objects. |
+| `versioning` | bool | false | Optional. When set to 'true', versioning is fully enabled for this bucket. |
+| `labels` | any | {} | Optional. The Key/value label pairs of the storage bucket. |
+| `retention_policy` | any | null | Optional. The retention policy for how long objects in the storage bucket should be retained. |
+| `encryption` | any | null | Optional. The storage bucket's encryption configuration. |
+| `cors` | any | null | Optional. The storage bucket's Cross-Origin Resource Sharing (CORS) configuration. |
+| `lifecycle_rules` | any | [] | Optional. The storage bucket's Lifecycle Rules configuration. |
+| `logging` | any | null | Optional. The storage bucket's logging configuration. |
+| `website` | any | null | Optional. The configuration if the storage bucket acts as a website. |
+| `objects` | any | [] | Optional. The list of objects. |
+| `iam_bindings` | any | [] | Optional. The list of IAM bindings. |
+| `iam_members` | any | [] | Optional. The list of IAM members. |
+
+### Objects
+
+Submodule for creating objects.
+
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_object "google_storage_bucket_object") for the **google_storage_bucket_object** documentation.
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `project_id` | string |  | Required. The project identifier. |
+| `` |  |  |  |
+
+### IAM bindings
+
+Submodule for creating IAM bindings.
+
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_iam#google_storage_bucket_iam_binding "google_storage_bucket_iam_binding") for the **google_storage_bucket_iam_binding** documentation.
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `project_id` | string |  | Required. The project identifier. |
+| `` |  |  |  |
+
+### IAM members
+
+Submodule for assigning IAM members.
+
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_iam#google_storage_bucket_iam_member "google_storage_bucket_iam_member") for the **google_storage_bucket_iam_member** documentation.
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `project_id` | string |  | Required. The project identifier. |
+| `` |  |  |  |
+
+## Outputs
+
+| Name | Description |
+|---|---|
+| `` |  |
