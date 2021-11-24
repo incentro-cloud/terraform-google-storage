@@ -87,12 +87,12 @@ Submodule for creating a storage bucket.
 | `force_destroy` | bool | false | Optional. When set to 'true', deleting a storage bucket will delete all contained objects. |
 | `versioning` | bool | false | Optional. When set to 'true', versioning is fully enabled for this bucket. |
 | `labels` | any | {} | Optional. The Key/value label pairs of the storage bucket. |
-| `retention_policy` | any | null | Optional. The retention policy for how long objects in the storage bucket should be retained. |
-| `encryption` | any | null | Optional. The storage bucket's encryption configuration. |
-| `cors` | any | null | Optional. The storage bucket's Cross-Origin Resource Sharing (CORS) configuration. |
-| `lifecycle_rules` | any | [] | Optional. The storage bucket's Lifecycle Rules configuration. |
-| `logging` | any | null | Optional. The storage bucket's logging configuration. |
-| `website` | any | null | Optional. The configuration if the storage bucket acts as a website. |
+| `retention_policy` | any | {} | Optional. The retention policy for how long objects in the storage bucket should be retained. |
+| `encryption` | any | {} | Optional. The storage bucket's encryption configuration. |
+| `cors` | any | {} | Optional. The storage bucket's Cross-Origin Resource Sharing (CORS) configuration. |
+| `lifecycle_rules` | {} | [] | Optional. The storage bucket's Lifecycle Rules configuration. |
+| `logging` | any | {} | Optional. The storage bucket's logging configuration. |
+| `website` | any | {} | Optional. The configuration if the storage bucket acts as a website. |
 | `objects` | any | [] | Optional. The list of objects. |
 | `iam_bindings` | any | [] | Optional. The list of IAM bindings. |
 | `iam_members` | any | [] | Optional. The list of IAM members. |
