@@ -1,4 +1,4 @@
 variable "iam_members" {
   type        = any
-  description = "The IAM members."
+  description = "Required. The list of IAM members."
 }

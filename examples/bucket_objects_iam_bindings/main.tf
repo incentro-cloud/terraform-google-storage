@@ -38,10 +38,6 @@ module "storage" {
     {
       members = ["allUsers"]
       role    = "roles/storage.objectViewer"
-    },
-    {
-      members = ["allUsers"]
-      role    = "roles/storage.objectAdmin"
     }
   ]
 }

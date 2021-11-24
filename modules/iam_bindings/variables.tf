@@ -1,4 +1,4 @@
 variable "iam_bindings" {
   type        = any
-  description = "The IAM bindings."
+  description = "Required. The list of IAM bindings."
 }

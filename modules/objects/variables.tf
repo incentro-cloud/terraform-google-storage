@@ -1,4 +1,4 @@
 variable "objects" {
   type        = any
-  description = "The objects"
+  description = "Required. The list of objects"
 }
