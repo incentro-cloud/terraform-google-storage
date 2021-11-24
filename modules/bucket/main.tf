@@ -40,7 +40,7 @@ resource "google_storage_bucket" "bucket" {
   }
 
   dynamic "retention_policy" {
-    for_each = var.retention_policy == null ? [] : [var.retention_policy]
+    for_each = var.retention_policy == {} ? [] : [var.retention_policy]
     content {
       is_locked        = lookup(retention_policy.value, "is_locked", false)
       retention_period = lookup(retention_policy.value, "retention_period", 400)
@@ -48,14 +48,14 @@ resource "google_storage_bucket" "bucket" {
   }
 
   dynamic "encryption" {
-    for_each = var.encryption == null ? [] : [var.encryption]
+    for_each = var.encryption == {} ? [] : [var.encryption]
     content {
       default_kms_key_name = encryption.value.default_kms_key_name
     }
   }
 
   dynamic "cors" {
-    for_each = var.cors == null ? [] : [var.cors]
+    for_each = var.cors == {} ? [] : [var.cors]
     content {
       origin          = lookup(cors.value, "origin", null)
       method          = lookup(cors.value, "method", null)
@@ -65,7 +65,7 @@ resource "google_storage_bucket" "bucket" {
   }
 
   dynamic "lifecycle_rule" {
-    for_each = var.lifecycle_rules == null ? [] : var.lifecycle_rules
+    for_each = var.lifecycle_rules == {} ? [] : var.lifecycle_rules
     content {
       action {
         type          = lifecycle_rule.value.action.type
@@ -82,7 +82,7 @@ resource "google_storage_bucket" "bucket" {
   }
 
   dynamic "logging" {
-    for_each = var.logging == null ? [] : [var.logging]
+    for_each = var.logging == {} ? [] : [var.logging]
     content {
       log_bucket        = logging.value.log_bucket
       log_object_prefix = lookup(logging.value, "log_object_prefix", null)
@@ -90,7 +90,7 @@ resource "google_storage_bucket" "bucket" {
   }
 
   dynamic "website" {
-    for_each = var.website == null ? [] : [var.website]
+    for_each = var.website == {} ? [] : [var.website]
     content {
       main_page_suffix = lookup(website.value, "main_page_suffix", null)
       not_found_page   = lookup(website.value, "not_found_page", null)

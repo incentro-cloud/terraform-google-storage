@@ -47,19 +47,19 @@ variable "labels" {
 variable "retention_policy" {
   type        = any
   description = "Optional. The retention policy for how long objects in the storage bucket should be retained."
-  default     = null
+  default     = {}
 }
 
 variable "encryption" {
   type        = any
   description = "Optional. The storage bucket's encryption configuration."
-  default     = null
+  default     = {}
 }
 
 variable "cors" {
   type        = any
   description = "Optional. The storage bucket's Cross-Origin Resource Sharing (CORS) configuration."
-  default     = null
+  default     = {}
 }
 
 variable "lifecycle_rules" {
@@ -71,13 +71,13 @@ variable "lifecycle_rules" {
 variable "logging" {
   type        = any
   description = "Optional. The storage bucket's logging configuration."
-  default     = null
+  default     = {}
 }
 
 variable "website" {
   type        = any
   description = "Optional. The configuration if the storage bucket acts as a website."
-  default     = null
+  default     = {}
 }
 
 variable "objects" {
