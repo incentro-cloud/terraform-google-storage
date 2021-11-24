@@ -17,7 +17,8 @@ This is an example of the usage of the module. More examples can be found in und
 
 ```hcl
 module "storage" {
-  source = "../../"
+  source  = "incentro-cloud/storage/google"
+  version = "~> 0.1"
 
   project_id    = var.project_id
   name          = "bucket"
