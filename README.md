@@ -2,9 +2,9 @@
 
 ![Cloud Build status](https://badger-tcppdqobjq-ew.a.run.app/build/status?project=examples-331911&id=437c5b6d-8b2a-4a41-a095-1f2e4c5cf42f "Cloud Build status")
 
-Module for creating storage buckets.
+Module for creating a storage bucket, objects, IAM bindings, and assigning IAM members.
 
-This module supports creating:
+This module supports creating/assigning:
 
 - Storage bucket
 - Objects
