@@ -53,11 +53,11 @@ module "objects" {
 
 locals {
   iam_bindings = [
-    for x in var.iam_bindings : {
-      bucket    = lookup(x, "bucket", module.bucket.bucket.name)
-      members   = x.members
-      role      = x.role
-      condition = lookup(x, "condition", null)
+    for iam_binding in var.iam_bindings : {
+      bucket    = lookup(iam_binding, "bucket", module.bucket.bucket.name)
+      members   = iam_binding.members
+      role      = iam_binding.role
+      condition = lookup(iam_binding, "condition", null)
     }
   ]
 }
@@ -74,11 +74,11 @@ module "iam_bindings" {
 
 locals {
   iam_members = [
-    for x in var.iam_members : {
-      bucket    = lookup(x, "bucket", module.bucket.bucket.name)
-      member    = x.member
-      role      = x.role
-      condition = lookup(x, "condition", null)
+    for iam_member in var.iam_members : {
+      bucket    = lookup(iam_member, "bucket", module.bucket.bucket.name)
+      member    = iam_member.member
+      role      = iam_member.role
+      condition = lookup(iam_member, "condition", null)
     }
   ]
 }
