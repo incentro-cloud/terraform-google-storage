@@ -11,7 +11,7 @@ This module supports creating/assigning:
 - IAM bindings
 - IAM members
 
-## Usage
+## Example usage
 
 This is an example of the usage of the module. More examples can be found in under 'examples'.
 
