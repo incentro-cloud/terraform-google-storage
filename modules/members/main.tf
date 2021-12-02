@@ -1,6 +1,6 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# IAM BINDINGS
-# Submodule for creating storage bucket IAM bindings.
+# IAM MEMBERS
+# Submodule for assigning storage IAM bucket members.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -23,15 +23,15 @@ terraform {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# IAM BINDINGS
+# MEMBERS
 # ---------------------------------------------------------------------------------------------------------------------
 
-resource "google_storage_bucket_iam_binding" "iam_bindings" {
+resource "google_storage_bucket_iam_member" "members" {
   provider = google-beta
 
-  for_each = { for iam_binding in var.iam_bindings : lower(iam_binding.role) => iam_binding }
+  for_each = { for members in var.members : lower("${members.member}/${members.role}") => members }
   bucket   = each.value.bucket
-  members  = each.value.members
+  member   = each.value.member
   role     = each.value.role
 
   dynamic "condition" {

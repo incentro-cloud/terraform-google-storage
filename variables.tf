@@ -86,13 +86,13 @@ variable "objects" {
   default     = []
 }
 
-variable "iam_bindings" {
+variable "bindings" {
   type        = any
   description = "Optional. The list of IAM bindings."
   default     = []
 }
 
-variable "iam_members" {
+variable "members" {
   type        = any
   description = "Optional. The list of IAM members."
   default     = []

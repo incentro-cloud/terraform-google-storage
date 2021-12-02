@@ -18,12 +18,12 @@ output "objects_names" {
   description = "The names of the objects."
 }
 
-output "iam_bindings" {
-  value = module.iam_bindings
+output "bindings" {
+  value = module.bindings
   description = "The IAM bindings."
 }
 
-output "iam_members" {
-  value = module.iam_members
+output "members" {
+  value = module.members
   description = "The IAM members."
 }

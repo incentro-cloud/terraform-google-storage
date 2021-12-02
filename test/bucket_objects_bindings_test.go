@@ -7,11 +7,11 @@ import (
 	"testing"
 )
 
-func TestTerraformBucketObjectsIamMembersExample(t *testing.T) {
+func TestTerraformBucketObjectsBindingsExample(t *testing.T) {
 	projectId := os.Getenv("PROJECT_ID")
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../examples/bucket_objects_iam_members",
+		TerraformDir: "../examples/bucket_objects_members",
 		Vars: map[string]interface{}{
 			"project_id": projectId,
 		},

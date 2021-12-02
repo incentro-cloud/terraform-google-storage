@@ -18,26 +18,26 @@ terraform {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# STORAGE BUCKET AND IAM BINDINGS
+# STORAGE BUCKET AND IAM MEMBERS
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "storage" {
   source = "../../"
 
   project_id = var.project_id
-  name       = "bucket-objects-iam-bindings"
+  name       = "bucket-objects-iam-members"
 
   objects = [
     {
-      name   = "incentro"
-      source = "./assets/incentro.png"
+      name   = "string"
+      content = "This is a string of data."
     }
   ]
 
-  iam_bindings = [
+  members = [
     {
-      members = ["allUsers"]
-      role    = "roles/storage.objectViewer"
+      member = "allUsers"
+      role   = "roles/storage.objectViewer"
     }
   ]
 }
