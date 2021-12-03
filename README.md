@@ -77,25 +77,25 @@ Submodule for creating a storage bucket.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket "google_storage_bucket") for the **google_storage_bucket** documentation.
 
-| Name | Type | Default | Description |
-|---|---|---|---|
-| `project_id` | string |  | Required. The project identifier. |
-| `name` | string |  | Required. The name of the storage bucket. |
-| `location` | string | "EU" | Optional. The location of the storage bucket. |
-| `storage_class` | string | "STANDARD" | Optional. The storage class of the storage bucket. |
-| `uniform_bucket_level_access` | bool | true | Optional. When set to 'true', enables uniform bucket-level access. |
-| `force_destroy` | bool | false | Optional. When set to 'true', deleting a storage bucket will delete all contained objects. |
-| `versioning` | bool | false | Optional. When set to 'true', versioning is fully enabled for this bucket. |
-| `labels` | any | {} | Optional. The Key/value label pairs of the storage bucket. |
-| `retention_policy` | any | {} | Optional. The retention policy for how long objects in the storage bucket should be retained. |
-| `encryption` | any | {} | Optional. The storage bucket's encryption configuration. |
-| `cors` | any | {} | Optional. The storage bucket's Cross-Origin Resource Sharing (CORS) configuration. |
-| `lifecycle_rules` | {} | [] | Optional. The storage bucket's Lifecycle Rules configuration. |
-| `logging` | any | {} | Optional. The storage bucket's logging configuration. |
-| `website` | any | {} | Optional. The configuration if the storage bucket acts as a website. |
-| `objects` | any | [] | Optional. The list of objects. |
-| `bindings` | any | [] | Optional. The list of IAM bindings. |
-| `members` | any | [] | Optional. The list of IAM members. |
+| Name                          | Type   | Default    | Description                                                                                   |
+|-------------------------------|--------|------------|-----------------------------------------------------------------------------------------------|
+| `project_id`                  | string |            | Required. The project identifier.                                                             |
+| `name`                        | string |            | Required. The name of the storage bucket.                                                     |
+| `location`                    | string | "EU"       | Optional. The location of the storage bucket.                                                 |
+| `storage_class`               | string | "STANDARD" | Optional. The storage class of the storage bucket.                                            |
+| `uniform_bucket_level_access` | bool   | true       | Optional. When set to 'true', enables uniform bucket-level access.                            |
+| `force_destroy`               | bool   | false      | Optional. When set to 'true', deleting a storage bucket will delete all contained objects.    |
+| `versioning`                  | bool   | false      | Optional. When set to 'true', versioning is fully enabled for this bucket.                    |
+| `labels`                      | any    | {}         | Optional. The Key/value label pairs of the storage bucket.                                    |
+| `retention_policy`            | any    | {}         | Optional. The retention policy for how long objects in the storage bucket should be retained. |
+| `encryption`                  | any    | {}         | Optional. The storage bucket's encryption configuration.                                      |
+| `cors`                        | any    | {}         | Optional. The storage bucket's Cross-Origin Resource Sharing (CORS) configuration.            |
+| `lifecycle_rules`             | {}     | []         | Optional. The storage bucket's Lifecycle Rules configuration.                                 |
+| `logging`                     | any    | {}         | Optional. The storage bucket's logging configuration.                                         |
+| `website`                     | any    | {}         | Optional. The configuration if the storage bucket acts as a website.                          |
+| `objects`                     | any    | []         | Optional. The list of objects.                                                                |
+| `bindings`                    | any    | []         | Optional. The list of IAM bindings.                                                           |
+| `members`                     | any    | []         | Optional. The list of IAM members.                                                            |
 
 ### Objects
 
@@ -103,12 +103,12 @@ Submodule for creating objects.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_object "google_storage_bucket_object") for the **google_storage_bucket_object** documentation.
 
-| Name | Type | Default | Description |
-|---|---|---|---|
-| `name` | string |  | Required. The name/path of the object. |
-| `content` | string | null | Optional. Either `content` or `source` has to be specified. The name/path of the object. |
-| `source` | string | null | Optional. Either `source` or `content` has to be specified. The source of the object. |
-| `bucket` | string | module.bucket | Optional. The storage bucket for the object. |
+| Name      | Type   | Default       | Description                                                                              |
+|-----------|--------|---------------|------------------------------------------------------------------------------------------|
+| `name`    | string |               | Required. The name/path of the object.                                                   |
+| `content` | string | null          | Optional. Either `content` or `source` has to be specified. The name/path of the object. |
+| `source`  | string | null          | Optional. Either `source` or `content` has to be specified. The source of the object.    |
+| `bucket`  | string | module.bucket | Optional. The storage bucket for the object.                                             |
 
 ### IAM bindings
 
@@ -116,12 +116,12 @@ Submodule for creating IAM bindings (authoritative).
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_iam#google_storage_bucket_iam_binding "google_storage_bucket_iam_binding") for the **google_storage_bucket_iam_binding** documentation.
 
-| Name | Type | Default | Description |
-|---|---|---|---|
-| `bucket` | string | module.bucket | Optional. The storage bucket for the IAM binding. |
-| `members` | any |  | Required. The identities that will be granted the privilege in role. |
-| `role` | string |  | Required. The role that should be applied. Only one IAM binding can be used per role. |
-| `condition` | any | null | Optional. The condition for the IAM binding. |
+| Name        | Type   | Default       | Description                                                                           |
+|-------------|--------|---------------|---------------------------------------------------------------------------------------|
+| `bucket`    | string | module.bucket | Optional. The storage bucket for the IAM binding.                                     |
+| `members`   | any    |               | Required. The identities that will be granted the privilege in role.                  |
+| `role`      | string |               | Required. The role that should be applied. Only one IAM binding can be used per role. |
+| `condition` | any    | null          | Optional. The condition for the IAM binding.                                          |
 
 ### IAM members
 
@@ -129,20 +129,20 @@ Submodule for assigning IAM members (non-authoritative).
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_iam#google_storage_bucket_iam_member "google_storage_bucket_iam_member") for the **google_storage_bucket_iam_member** documentation.
 
-| Name | Type | Default | Description |
-|---|---|---|---|
-| `bucket` | string | module.bucket | Optional. The storage bucket for the IAM member assignment. |
-| `member` | any |  | Required. The identities that will be granted the privilege in role. |
-| `role` | string |  | Required. The role that should be applied. |
-| `condition` | any | null | Optional. The condition for the IAM member assignment. |
+| Name        | Type   | Default       | Description                                                          |
+|-------------|--------|---------------|----------------------------------------------------------------------|
+| `bucket`    | string | module.bucket | Optional. The storage bucket for the IAM member assignment.          |
+| `member`    | any    |               | Required. The identities that will be granted the privilege in role. |
+| `role`      | string |               | Required. The role that should be applied.                           |
+| `condition` | any    | null          | Optional. The condition for the IAM member assignment.               |
 
 ## Outputs
 
-| Name | Description |
-|---|---|
-| `bucket` | The storage bucket. |
-| `bucket_name` | The name of the storage bucket. |
-| `objects` | The objects. |
-| `objects_names` | The names of the objects. |
-| `bindings` | The IAM bindings. |
-| `members` | The IAM members. |
+| Name            | Description                     |
+|-----------------|---------------------------------|
+| `bucket`        | The storage bucket.             |
+| `bucket_name`   | The name of the storage bucket. |
+| `objects`       | The objects.                    |
+| `objects_names` | The names of the objects.       |
+| `bindings`      | The IAM bindings.               |
+| `members`       | The IAM members.                |
