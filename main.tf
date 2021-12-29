@@ -52,20 +52,20 @@ module "objects" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 locals {
-  bindings = [
-    for binding in var.bindings : {
-      bucket    = lookup(binding, "bucket", module.bucket.bucket.name)
-      members   = binding.members
-      role      = binding.role
-      condition = lookup(binding, "condition", null)
+  iam_bindings = [
+    for iam_binding in var.iam_bindings : {
+      bucket    = lookup(iam_binding, "bucket", module.bucket.bucket.name)
+      members   = iam_binding.members
+      role      = iam_binding.role
+      condition = lookup(iam_binding, "condition", null)
     }
   ]
 }
 
-module "bindings" {
-  source = "./modules/bindings"
+module "iam_bindings" {
+  source = "./modules/iam_bindings"
 
-  bindings = local.bindings
+  iam_bindings = local.iam_bindings
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -73,18 +73,18 @@ module "bindings" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 locals {
-  members = [
-    for member in var.members : {
-      bucket    = lookup(member, "bucket", module.bucket.bucket.name)
-      member    = member.member
-      role      = member.role
-      condition = lookup(member, "condition", null)
+  iam_members = [
+    for iam_member in var.iam_members : {
+      bucket    = lookup(iam_member, "bucket", module.bucket.bucket.name)
+      member    = iam_member.member
+      role      = iam_member.role
+      condition = lookup(iam_member, "condition", null)
     }
   ]
 }
 
-module "members" {
-  source = "./modules/members"
+module "iam_members" {
+  source = "./modules/iam_members"
 
-  members = local.members
+  iam_members = local.iam_members
 }

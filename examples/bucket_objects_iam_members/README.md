@@ -27,7 +27,7 @@ module "storage" {
     }
   ]
 
-  members = [
+  iam_members = [
     {
       member = "allUsers"
       role   = "roles/storage.objectViewer"

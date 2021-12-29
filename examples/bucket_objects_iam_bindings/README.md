@@ -27,7 +27,7 @@ module "storage" {
     }
   ]
 
-  bindings = [
+  iam_bindings = [
     {
       members = ["allUsers"]
       role    = "roles/storage.objectViewer"

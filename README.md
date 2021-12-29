@@ -58,7 +58,7 @@ module "storage" {
     }
   ]
 
-  members = [
+  iam_members = [
     {
       member = "allUsers"
       role    = "roles/storage.objectViewer"
@@ -94,8 +94,8 @@ Submodule for creating a storage bucket.
 | `logging`                     | any    | {}         | Optional. The storage bucket's logging configuration.                                         |
 | `website`                     | any    | {}         | Optional. The configuration if the storage bucket acts as a website.                          |
 | `objects`                     | any    | []         | Optional. The list of objects.                                                                |
-| `bindings`                    | any    | []         | Optional. The list of IAM bindings.                                                           |
-| `members`                     | any    | []         | Optional. The list of IAM members.                                                            |
+| `iam_bindings`                | any    | []         | Optional. The list of IAM bindings.                                                           |
+| `iam_members`                 | any    | []         | Optional. The list of IAM members.                                                            |
 
 ### Objects
 
